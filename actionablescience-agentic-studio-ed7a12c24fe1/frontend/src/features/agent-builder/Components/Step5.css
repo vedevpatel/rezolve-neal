@@ -1,0 +1,40 @@
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-label {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 4px;
+}
+
+.summary-value {
+  font-weight: 500;
+  color: #212529;
+  font-size: 0.9rem;
+}
+
+.deployment-options-title {
+  margin-top: 2rem;
+}
+
+.deployment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.deployment-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

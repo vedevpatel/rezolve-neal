@@ -1,0 +1,151 @@
+.agent-node {
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 250px;
+  max-width: 350px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+.agent-node:hover {
+  border-color: #007bff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.agent-node-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.agent-node-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  flex: 1;
+}
+
+.agent-node-status {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.agent-node-status.DEPLOYED {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.agent-node-status.DRAFT {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.agent-node-status.ARCHIVED {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.agent-node-status.template {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.agent-node-description {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.agent-node-details {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.agent-node-param {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+}
+
+.param-label {
+  color: #888;
+  font-weight: 500;
+}
+
+.param-value {
+  color: #333;
+  font-weight: 600;
+}
+
+.agent-node-io {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+}
+
+.io-label,
+.tools-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.io-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.io-item {
+  font-size: 11px;
+  color: #555;
+  padding: 2px 0;
+}
+
+.agent-node-tools {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+}
+
+.tools-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.tool-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  background-color: #e7f3ff;
+  color: #0066cc;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.node-handle {
+  width: 10px;
+  height: 10px;
+  background-color: #007bff;
+  border: 2px solid white;
+}
+
+.node-handle:hover {
+  background-color: #0056b3;
+}

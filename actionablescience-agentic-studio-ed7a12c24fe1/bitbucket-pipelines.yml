@@ -1,0 +1,175 @@
+# Bitbucket Pipelines configuration for Rezolve (Agentic Studio)
+
+image: node:18
+
+definitions:
+  services:
+    docker:
+      memory: 2048
+
+  caches:
+    pip: ~/.cache/pip
+    npm: ~/.npm
+
+  steps:
+    # Backend Linting Step
+    - step: &backend-lint
+        name: Backend Linting (ruff + black)
+        image: python:3.11
+        caches:
+          - pip
+        script:
+          - echo "Running backend linting..."
+          - cd backend
+          - pip install ruff black mypy
+          - echo "Running ruff..."
+          - ruff check app/ || echo "Ruff issues found"
+          - echo "Running black..."
+          - black --check app/ || echo "Black formatting issues found"
+          - echo "Linting complete"
+
+    # Frontend Linting Step
+    - step: &frontend-lint
+        name: Frontend Linting (ESLint)
+        caches:
+          - node
+          - npm
+        script:
+          - echo "Running frontend linting..."
+          - cd frontend
+          - npm ci
+          - npm run lint || echo "Linting issues found"
+          - echo "Linting complete"
+
+    # Build Backend Step
+    - step: &build-backend
+        name: Build Backend
+        image: python:3.11
+        script:
+          - echo "Building backend..."
+          - cd backend
+          - pip install --upgrade pip
+          - pip install -r requirements.txt
+          - echo "Backend build complete"
+
+    # Build Frontend Step
+    - step: &build-frontend
+        name: Build Frontend
+        caches:
+          - node
+          - npm
+        script:
+          - echo "Building frontend..."
+          - cd frontend
+          - npm ci
+          - npm run build
+          - echo "Frontend build complete"
+        artifacts:
+          - frontend/dist/**
+
+    # Docker Build Step
+    - step: &docker-build
+        name: Build Docker Images
+        services:
+          - docker
+        script:
+          - echo "Building Docker images..."
+          - docker-compose build
+          - echo "Docker images built successfully"
+
+pipelines:
+  # Default pipeline (runs on every push)
+  default:
+    - parallel:
+        - step: *backend-lint
+        - step: *frontend-lint
+    - parallel:
+        - step: *build-backend
+        - step: *build-frontend
+
+  # Main/Production branch pipeline
+  branches:
+    main:
+      - parallel:
+          - step: *backend-lint
+          - step: *frontend-lint
+      - parallel:
+          - step: *build-backend
+          - step: *build-frontend
+      - step: *docker-build
+      - step:
+          name: Deploy to Production
+          deployment: production
+          trigger: manual  # Require manual approval
+          script:
+            - echo "Deploying to production..."
+            - echo "Add your deployment commands here"
+            # Example: Deploy to cloud service
+            # - docker push your-registry/backend:latest
+            # - docker push your-registry/frontend:latest
+            # - ssh user@server 'cd /app && docker-compose pull && docker-compose up -d'
+
+    # Staging branch pipeline
+    staging:
+      - parallel:
+          - step: *backend-lint
+          - step: *frontend-lint
+      - parallel:
+          - step: *build-backend
+          - step: *build-frontend
+      - step: *docker-build
+      - step:
+          name: Deploy to Staging
+          deployment: staging
+          script:
+            - echo "Deploying to staging..."
+            - echo "Add your staging deployment commands here"
+
+  # Pull Request pipeline
+  pull-requests:
+    '**':  # Run for all pull requests
+      - parallel:
+          - step:
+              <<: *backend-lint
+              name: Backend Linting (PR)
+          - step:
+              <<: *frontend-lint
+              name: Frontend Linting (PR)
+      - step:
+          name: Build Validation
+          script:
+            - echo "Validating builds..."
+            - cd backend && pip install -r requirements.txt
+            - cd ../frontend && npm ci && npm run build
+            - echo "Build validation complete"
+
+  # Custom pipelines
+  custom:
+    lint-only:
+      - parallel:
+          - step: *backend-lint
+          - step: *frontend-lint
+
+    quick-build:
+      - parallel:
+          - step: *build-backend
+          - step: *build-frontend
+
+    full-build:
+      - parallel:
+          - step: *backend-lint
+          - step: *frontend-lint
+      - parallel:
+          - step: *build-backend
+          - step: *build-frontend
+      - step: *docker-build
+
+# Pipeline options
+options:
+  max-time: 30  # Maximum pipeline execution time in minutes
+
+  # Docker configuration
+  docker: true
+
+  # Size configuration (adjust based on your needs)
+  size: 2x  # Available: 1x (default), 2x, 4x, 8x

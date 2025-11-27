@@ -1,0 +1,26 @@
+.custom-node {
+  border: 2px solid #ff0072; /* The pink border for the agent */
+  border-radius: 8px;
+  background: #fff;
+  width: 250px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.node-header {
+  background: #ff0072;
+  color: white;
+  padding: 8px 12px;
+  font-weight: bold;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.node-body {
+  padding: 12px;
+  font-size: 0.9rem;
+}
+
+.node-body p {
+  margin: 4px 0 0;
+  color: #555;
+}

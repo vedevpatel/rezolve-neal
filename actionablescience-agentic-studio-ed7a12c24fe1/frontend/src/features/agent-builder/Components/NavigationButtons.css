@@ -1,0 +1,49 @@
+.nav-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 1.85rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Previous Button Styling */
+.prev-button {
+  background-color: #ffffff;
+  color: #495057;
+  border-color: #ced4da;
+}
+
+.prev-button:hover:not(:disabled) {
+  background-color: #f8f9fa;
+}
+
+/* Next Button Styling */
+.next-button {
+  background-color: #4361ee;
+  color: #ffffff;
+  border-color: #4361ee;
+}
+
+.next-button:hover {
+  background-color: #3a52cc;
+}
+
+/* Disabled State */
+.nav-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

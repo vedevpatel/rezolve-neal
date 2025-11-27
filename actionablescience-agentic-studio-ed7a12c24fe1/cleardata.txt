@@ -1,0 +1,18 @@
+# Clear Data & Stuck Executions Guide
+
+cd agentic-studio
+./clear_data.sh
+
+This will:
+1. Stop all Docker containers
+2. Remove the database volume
+3. Restart containers with a fresh database
+
+This permanently deletes ALL data including:
+- All agents
+- All workflows
+- All executions
+- All execution history
+
+## How to Find Stuck Executions
+

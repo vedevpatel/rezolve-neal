@@ -1,0 +1,106 @@
+/* Main card styling for "My Agents" */
+.agent-card {
+  position: relative; /* Needed for the overlay */
+  background-color: #f0fdf4; /* Light green background */
+  border: 1px solid #bbf7d0; /* Green border */
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: all 0.2s ease-in-out;
+  overflow: hidden; /* Ensures overlay respects border-radius */
+}
+
+.agent-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-color: #4ade80;
+}
+
+.agent-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0.75rem;
+}
+
+.agent-icon-wrapper {
+  background-color: #dcfce7;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #22c55e;
+}
+
+.agent-card-header h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.agent-description {
+  margin: 0 0 1.5rem 0;
+  color: #52525b;
+  font-size: 0.95rem;
+  min-height: 40px; /* Ensures consistent card height */
+}
+
+.agent-card-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Re-using tag styles */
+.tag {
+  background-color: #f3f4f6;
+  color: #374151;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.custom-tag {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+/* Hover Overlay Styles */
+.agent-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 1rem;
+  opacity: 0;
+  animation: fadeIn 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.use-agent-btn {
+  background-color: #22c55e; /* Green button */
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.use-agent-btn:hover {
+  background-color: #16a34a;
+}

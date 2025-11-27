@@ -1,0 +1,33 @@
+/* Custom styles for ReactFlow canvas */
+
+/* Enhanced arrow animation with looping effect */
+.react-flow__edge-path {
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+/* Animated edge styling */
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 5;
+  animation: dashdraw 0.5s linear infinite;
+}
+
+@keyframes dashdraw {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+/* Green arrow marker */
+.react-flow__arrowhead {
+  transition: fill 0.3s ease;
+}
+
+/* Custom edge styles */
+.react-flow__edge {
+  cursor: pointer;
+}
+
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: #4361ee !important;
+  stroke-width: 2.5 !important;
+}

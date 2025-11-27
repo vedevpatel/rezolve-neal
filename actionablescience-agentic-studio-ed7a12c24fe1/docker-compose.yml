@@ -1,0 +1,46 @@
+version: "3.9"  # docker-compose syntax version
+
+services:       # each container defined under 'services'
+
+  backend:
+    build: ./backend             # path to backend Dockerfile
+    container_name: agent_builder_backend
+    ports:
+      - "8000:8000"              # expose backend on localhost:8000
+    env_file:
+      - ./.env                   # load environment variables from root
+    depends_on:
+      db:
+        condition: service_healthy  # wait for database to be healthy
+
+  db:
+    image: postgres:14           # use PostgreSQL image
+    container_name: agent_builder_db
+    restart: always              # auto restart if container stops
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-agentbuilder}
+    ports:
+      - "5432:5432"              # expose Postgres port
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # persist data locally
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-agentbuilder}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build: ./frontend            # path to frontend Dockerfile
+    container_name: agent_builder_frontend
+    ports:
+      - "5173:5173"              # expose frontend
+    volumes:
+      - ./frontend:/app          # mount frontend code for hot reload
+      - /app/node_modules        # prevent overwriting node_modules
+    depends_on:
+      - backend                  # wait for backend before running
+
+volumes:
+  postgres_data:                 # named volume for DB persistence

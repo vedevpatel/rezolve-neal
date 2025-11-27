@@ -1,0 +1,205 @@
+.landing-container {
+  padding: 2rem 3rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.landing-header h2 {
+  margin: 0;
+  font-size: 2.1rem;
+}
+
+.landing-header p {
+  margin: 4px 0 0;
+  color: #6c757d;
+  font-size: 1.05rem;
+}
+
+.new-agent-btn {
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  padding: 0.85rem 1.75rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tabs-container {
+  display: inline-flex;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 5px;
+  margin-bottom: 2rem;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: #495057;
+}
+
+.tab-button.active {
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  color: #212529;
+}
+
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.template-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+}
+
+.card-body {
+  flex-grow: 1;
+}
+
+.card-body p {
+  color: #6c757d;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.card-value {
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 0.85rem;
+  margin: 1rem 0;
+  font-size: 0.98rem;
+}
+
+.card-value span {
+  font-weight: 600;
+}
+
+.card-footer {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: #e9ecef;
+  color: #495057;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.my-agents-view {
+  width: 100%;
+}
+
+.empty-state,
+.loading-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #6c757d;
+}
+
+.empty-icon {
+  font-size: 4.5rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  font-size: 1.75rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* Add position relative to the card to contain the absolute overlay */
+.template-card {
+  position: relative; 
+  transition: all 0.2s ease-in-out;
+  /* ... your existing styles ... */
+}
+
+/* Add a subtle lift effect on hover */
+.template-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-color: #4361ee;
+}
+
+/* Styles for the overlay */
+.template-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px; /* Match the card's border-radius */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0; /* Start hidden */
+  animation: fadeIn 0.2s forwards; /* Fade in animation */
+}
+
+/* Styles for the "Use this template" button */
+.use-template-btn {
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transform: scale(0.95);
+  animation: popIn 0.2s 0.1s forwards; /* Pop in animation */
+}
+
+/* Keyframe animations for a smooth effect */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  to {
+    transform: scale(1);
+  }
+}
